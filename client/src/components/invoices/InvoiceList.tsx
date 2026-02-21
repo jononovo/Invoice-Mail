@@ -128,7 +128,6 @@ export function InvoiceList({ invoices, selectedId, onSelect }: InvoiceListProps
                     !isSelected && invoice.read ? "opacity-50 group-hover:opacity-100" : ""
                   )}>
                     <Square className={cn("w-[18px] h-[18px]", isSelected ? "text-[#0b57d0] dark:text-[#a8c7fa]" : "")} />
-                    <Star className={cn("w-[18px] h-[18px]", invoice.starred ? "fill-yellow-400 text-yellow-400 opacity-100" : isSelected ? "text-[#0b57d0] dark:text-[#a8c7fa]" : "")} />
                   </div>
                   
                   <div className="flex items-center gap-2 overflow-hidden flex-1 pl-1">
@@ -209,6 +208,11 @@ export function InvoiceList({ invoices, selectedId, onSelect }: InvoiceListProps
                       )}>
                         Due: {invoice.dateDue}
                       </span>
+                      <Star className={cn(
+                        "w-[16px] h-[16px] ml-2", 
+                        invoice.starred ? "fill-yellow-400 text-yellow-400 opacity-100" : "text-muted-foreground opacity-50 hover:opacity-100",
+                        isSelected && !invoice.starred ? "text-[#001d35] dark:text-[#e8eaed]" : ""
+                      )} />
                     </div>
                   </div>
                 </div>
