@@ -68,12 +68,12 @@ export function Sidebar({ activeFolder, onFolderChange }: SidebarProps) {
                 <span>{item.label}</span>
               </div>
               {item.count > 0 && (
-                <div className="flex flex-col items-end text-xs">
-                  <span className={isActive ? "text-primary" : "text-foreground"}>
-                    {item.count}
-                  </span>
-                  <span className="text-[10px] text-muted-foreground font-mono">
+                <div className="flex items-baseline gap-1 text-xs ml-auto">
+                  <span className={cn("font-mono tracking-tight", isActive ? "text-[#0b57d0] dark:text-[#a8c7fa] font-bold" : "text-foreground font-medium")}>
                     {item.value}
+                  </span>
+                  <span className="text-[10px] text-muted-foreground font-medium">
+                    /{item.count}
                   </span>
                 </div>
               )}
