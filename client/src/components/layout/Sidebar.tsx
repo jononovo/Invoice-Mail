@@ -42,7 +42,7 @@ export function Sidebar({ activeFolder, onFolderChange }: SidebarProps) {
   return (
     <div className="w-[260px] flex-shrink-0 flex flex-col py-3 px-2 text-sm font-medium">
       <div className="px-2 mb-4">
-        <button className="flex items-center gap-3 bg-primary text-primary-foreground hover:opacity-90 px-5 py-4 rounded-2xl transition-all shadow-md active:scale-95">
+        <button className="flex items-center gap-4 bg-[#c2e7ff] text-[#001d35] hover:bg-[#b0d5f1] dark:bg-[#c2e7ff] dark:hover:bg-[#b0d5f1] px-5 py-4 rounded-2xl transition-all font-medium">
           <Plus className="w-5 h-5" />
           <span className="text-base">Upload Invoice</span>
         </button>

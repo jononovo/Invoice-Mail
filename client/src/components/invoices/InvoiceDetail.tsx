@@ -32,15 +32,15 @@ export function InvoiceDetail({ invoice }: { invoice: Invoice }) {
         </div>
 
         <div className="ml-auto flex items-center gap-2">
-          <Button variant="outline" className="h-8 rounded-full border-muted-foreground/30 shadow-sm">
-            <AlertTriangle className="w-4 h-4 mr-2 text-yellow-500" />
+          <Button variant="outline" className="h-8 rounded-full border-transparent bg-secondary/50 hover:bg-secondary text-muted-foreground hover:text-foreground">
+            <AlertTriangle className="w-4 h-4 mr-2" />
             Block
           </Button>
-          <Button variant="outline" className="h-8 rounded-full border-muted-foreground/30 shadow-sm">
+          <Button variant="outline" className="h-8 rounded-full border-transparent bg-secondary/50 hover:bg-secondary text-muted-foreground hover:text-foreground">
             <Clock className="w-4 h-4 mr-2" />
             Schedule
           </Button>
-          <Button className="h-8 rounded-full shadow-md bg-blue-600 hover:bg-blue-700 text-white border-0">
+          <Button className="h-8 rounded-full bg-[#c2e7ff] hover:bg-[#b0d5f1] text-[#001d35] border-0">
             <CheckCircle2 className="w-4 h-4 mr-2" />
             Pay Now
           </Button>
