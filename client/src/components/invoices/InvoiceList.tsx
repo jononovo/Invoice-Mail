@@ -170,9 +170,11 @@ export function InvoiceList({ invoices, selectedId, onSelect }: InvoiceListProps
                   
                   <div className="flex items-center justify-between mt-1">
                     <div className="flex items-center gap-2">
-                      <Badge variant={invoice.urgency === "High" ? "destructive" : invoice.urgency === "Medium" ? "secondary" : "outline"} className={cn(
-                        "text-[10px] px-1.5 py-0 h-4",
-                        isSelected && invoice.urgency !== "High" && "bg-black/10 dark:bg-white/10 text-current border-transparent"
+                      <Badge variant="outline" className={cn(
+                        "text-[10px] px-1.5 py-0 h-4 border-transparent",
+                        invoice.urgency === "High" && "bg-red-500/15 text-red-600 dark:bg-red-500/20 dark:text-red-300",
+                        invoice.urgency === "Medium" && "bg-amber-500/15 text-amber-700 dark:bg-amber-500/20 dark:text-amber-300",
+                        invoice.urgency === "Low" && "bg-slate-500/15 text-slate-600 dark:bg-slate-500/20 dark:text-slate-300",
                       )}>
                         {invoice.urgency} Urgency
                       </Badge>
