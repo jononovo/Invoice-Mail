@@ -117,7 +117,14 @@ export function InvoiceList({ invoices, selectedId, onSelect }: InvoiceListProps
                 )}
               >
                 {/* Floating Hover Action Menu - Positioned lower right */}
-                <div className="absolute right-3 bottom-3 hidden group-hover:flex items-center gap-1 bg-white dark:bg-[#303134] z-10 px-1 py-0.5 rounded shadow-[0_1px_2px_rgba(60,64,67,0.3),0_1px_3px_1px_rgba(60,64,67,0.15)] dark:shadow-[0_1px_2px_rgba(0,0,0,0.3),0_1px_3px_1px_rgba(0,0,0,0.15)]">
+                <div className={cn(
+                  "absolute right-3 bottom-3 hidden group-hover:flex items-center gap-1 z-10 px-1 py-0.5 rounded shadow-[0_1px_2px_rgba(60,64,67,0.3),0_1px_3px_1px_rgba(60,64,67,0.15)] dark:shadow-[0_1px_2px_rgba(0,0,0,0.3),0_1px_3px_1px_rgba(0,0,0,0.15)]",
+                  isSelected 
+                    ? "bg-[#d3e3fd] dark:bg-[#414549]" 
+                    : !invoice.read 
+                      ? "bg-card dark:bg-[#202124]" 
+                      : "bg-[#f2f6fc] dark:bg-[#202124]"
+                )}>
                   <div className="p-1.5 rounded-full hover:bg-black/10 dark:hover:bg-white/10 text-muted-foreground hover:text-foreground transition-colors cursor-pointer" title="Archive">
                     <Archive className="w-[18px] h-[18px]" />
                   </div>
