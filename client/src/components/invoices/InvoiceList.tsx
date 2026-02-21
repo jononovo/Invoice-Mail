@@ -76,7 +76,7 @@ export function InvoiceList({ invoices, selectedId, onSelect }: InvoiceListProps
         <button className="flex items-center gap-2 px-4 py-3 border-b-2 border-primary text-primary font-medium text-sm whitespace-nowrap min-w-max">
           <Inbox className="w-4 h-4" />
           Primary
-          <Badge variant="default" className="ml-1 h-5 px-1.5 py-0 text-[10px] rounded-full">1 new</Badge>
+          <Badge variant="outline" className="ml-1 h-5 px-1.5 py-0 text-[10px] rounded-full bg-primary/10 text-primary border-transparent">1 new</Badge>
         </button>
         <button className="flex items-center gap-2 px-4 py-3 border-b-2 border-transparent text-muted-foreground hover:bg-secondary/30 text-sm transition-colors whitespace-nowrap min-w-max">
           <Tag className="w-4 h-4" />
