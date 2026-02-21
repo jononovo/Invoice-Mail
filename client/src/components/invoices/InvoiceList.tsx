@@ -14,7 +14,8 @@ import {
   MoreVertical,
   Inbox,
   Users,
-  Info
+  Info,
+  GripVertical
 } from "lucide-react";
 import { type Invoice } from "@/lib/mock-data";
 import { cn } from "@/lib/utils";
@@ -114,16 +115,22 @@ export function InvoiceList({ invoices, selectedId, onSelect }: InvoiceListProps
                   !isSelected && "hover:bg-[#e1e5ea] dark:hover:bg-[#303134] hover:shadow-[inset_1px_0_0_0_#dadce0,-1px_0_0_0_#dadce0_inset]"
                 )}
               >
-                <div className="flex items-center gap-3 mb-1">
-                  <div className={cn(
-                    "flex gap-2 transition-opacity",
-                    !isSelected && invoice.read ? "opacity-50 group-hover:opacity-100" : ""
-                  )}>
-                    <Square className={cn("w-4 h-4", isSelected ? "text-[#0b57d0] dark:text-[#a8c7fa]" : "")} />
-                    <Star className={cn("w-4 h-4", invoice.starred ? "fill-yellow-400 text-yellow-400 opacity-100" : isSelected ? "text-[#0b57d0] dark:text-[#a8c7fa]" : "")} />
+                <div className="flex items-center gap-3 mb-1 relative">
+                  
+                  {/* Drag Handle - shows on hover */}
+                  <div className="absolute -left-6 opacity-0 group-hover:opacity-100 transition-opacity cursor-grab text-muted-foreground/50 hover:text-foreground">
+                    <GripVertical className="w-4 h-4" />
                   </div>
                   
-                  <div className="flex items-center gap-2 overflow-hidden flex-1">
+                  <div className={cn(
+                    "flex gap-3 transition-opacity ml-1 items-center",
+                    !isSelected && invoice.read ? "opacity-50 group-hover:opacity-100" : ""
+                  )}>
+                    <Square className={cn("w-[18px] h-[18px]", isSelected ? "text-[#0b57d0] dark:text-[#a8c7fa]" : "")} />
+                    <Star className={cn("w-[18px] h-[18px]", invoice.starred ? "fill-yellow-400 text-yellow-400 opacity-100" : isSelected ? "text-[#0b57d0] dark:text-[#a8c7fa]" : "")} />
+                  </div>
+                  
+                  <div className="flex items-center gap-2 overflow-hidden flex-1 pl-1">
                     <Avatar className="w-5 h-5 rounded-sm">
                       <AvatarImage src={invoice.vendor.logo} />
                       <AvatarFallback className="text-[10px] rounded-sm">{invoice.vendor.name[0]}</AvatarFallback>
