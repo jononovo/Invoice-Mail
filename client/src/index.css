@@ -54,7 +54,7 @@
 }
 
 .dark {
-  --background: 220 10% 12%; /* Dark grey Gmail BG */
+  --background: 226 21% 25%; /* Blue-ish grey like Gmail */
   --foreground: 0 0% 98%;
   --card: 220 10% 12%;
   --card-foreground: 0 0% 98%;
@@ -62,16 +62,16 @@
   --popover-foreground: 0 0% 98%;
   --primary: 217 91% 75%; /* Soft Blue */
   --primary-foreground: 220 10% 12%;
-  --secondary: 220 10% 18%;
+  --secondary: 226 15% 30%;
   --secondary-foreground: 0 0% 98%;
-  --muted: 220 10% 18%;
-  --muted-foreground: 220 10% 65%;
-  --accent: 220 10% 22%;
+  --muted: 226 15% 30%;
+  --muted-foreground: 220 10% 75%;
+  --accent: 226 15% 35%;
   --accent-foreground: 0 0% 98%;
   --destructive: 0 62.8% 30.6%;
   --destructive-foreground: 0 0% 98%;
-  --border: 220 10% 22%;
-  --input: 220 10% 22%;
+  --border: 226 15% 30%;
+  --input: 226 15% 30%;
   --ring: 217 91% 75%;
 }
 

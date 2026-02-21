@@ -29,7 +29,7 @@ export default function Home() {
             setSelectedInvoiceId(null);
           }} 
         />
-        <div className="flex flex-1 overflow-hidden rounded-tl-xl bg-card border-t border-l shadow-2xl mr-2 mb-2">
+        <div className="flex flex-1 overflow-hidden rounded-3xl bg-card shadow-2xl mr-4 mb-4 mt-2">
           <InvoiceList 
             invoices={filteredInvoices}
             selectedId={selectedInvoiceId}
