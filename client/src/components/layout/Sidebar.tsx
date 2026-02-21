@@ -6,7 +6,9 @@ import {
   Star, 
   Plus, 
   ChevronDown,
-  AlertCircle
+  AlertCircle,
+  ShieldAlert,
+  MessageSquare
 } from "lucide-react";
 import { type InvoiceStatus, mockInvoices } from "@/lib/mock-data";
 import { cn } from "@/lib/utils";
@@ -31,12 +33,16 @@ export function Sidebar({ activeFolder, onFolderChange }: SidebarProps) {
   const blockedStats = getStats('blocked');
   const paidStats = getStats('paid');
   const scheduledStats = getStats('scheduled');
+  const contestStats = getStats('contest');
+  const inquireStats = getStats('inquire');
 
   const navItems = [
-    { id: 'inbox' as const, label: 'Inbox', icon: Inbox, count: inboxStats.count, value: inboxStats.value },
+    { id: 'inbox' as const, label: 'To Pay (Inbox)', icon: Inbox, count: inboxStats.count, value: inboxStats.value },
     { id: 'scheduled' as const, label: 'Scheduled', icon: Clock, count: scheduledStats.count, value: scheduledStats.value },
     { id: 'paid' as const, label: 'Paid', icon: Send, count: paidStats.count, value: paidStats.value },
-    { id: 'blocked' as const, label: 'Blocked / Unsure', icon: FileBox, count: blockedStats.count, value: blockedStats.value },
+    { id: 'blocked' as const, label: 'Blocked', icon: FileBox, count: blockedStats.count, value: blockedStats.value },
+    { id: 'contest' as const, label: 'Contest', icon: ShieldAlert, count: contestStats.count, value: contestStats.value },
+    { id: 'inquire' as const, label: 'Inquire', icon: MessageSquare, count: inquireStats.count, value: inquireStats.value },
   ];
 
   return (

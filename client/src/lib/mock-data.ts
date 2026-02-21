@@ -1,5 +1,5 @@
 export type Urgency = "High" | "Medium" | "Low";
-export type InvoiceStatus = "inbox" | "scheduled" | "paid" | "blocked";
+export type InvoiceStatus = "inbox" | "scheduled" | "paid" | "blocked" | "contest" | "inquire";
 export type DocumentType = "pdf" | "inline" | "link";
 
 export interface Vendor {
