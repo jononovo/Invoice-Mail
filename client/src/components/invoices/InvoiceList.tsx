@@ -176,12 +176,26 @@ export function InvoiceList({ invoices, selectedId, onSelect }: InvoiceListProps
                     )}>
                       {invoice.purpose}
                     </span>
-                    <span className={cn(
-                      "text-sm font-mono whitespace-nowrap",
-                      isSelected ? "text-[#0b57d0] dark:text-[#a8c7fa] font-bold" : "text-primary font-medium"
-                    )}>
-                      {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(invoice.value)}
-                    </span>
+                    <div className="flex items-center gap-2">
+                      {invoice.valueCaution && (
+                        <span className={cn(
+                          "text-[10px] font-medium px-1.5 py-0 h-4 rounded border whitespace-nowrap flex items-center",
+                          invoice.valueCaution === "Consistent" ? "bg-green-500/10 text-green-700 border-green-200 dark:bg-green-500/20 dark:text-green-300 dark:border-green-500/30" :
+                          invoice.valueCaution === "Regular" ? "bg-blue-500/10 text-blue-700 border-blue-200 dark:bg-blue-500/20 dark:text-blue-300 dark:border-blue-500/30" :
+                          invoice.valueCaution === "Review" ? "bg-amber-500/10 text-amber-700 border-amber-200 dark:bg-amber-500/20 dark:text-amber-300 dark:border-amber-500/30" :
+                          invoice.valueCaution === "Suspicious" ? "bg-orange-500/10 text-orange-700 border-orange-200 dark:bg-orange-500/20 dark:text-orange-300 dark:border-orange-500/30" :
+                          "bg-red-500/10 text-red-700 border-red-200 dark:bg-red-500/20 dark:text-red-300 dark:border-red-500/30"
+                        )}>
+                          {invoice.valueCaution}
+                        </span>
+                      )}
+                      <span className={cn(
+                        "text-sm font-mono whitespace-nowrap",
+                        isSelected ? "text-[#0b57d0] dark:text-[#a8c7fa] font-bold" : "text-primary font-medium"
+                      )}>
+                        {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(invoice.value)}
+                      </span>
+                    </div>
                   </div>
                   
                   <div className="flex items-center justify-end mt-1">

@@ -2,6 +2,7 @@ export type Urgency = "High" | "Medium" | "Low";
 export type InvoiceStatus = "inbox" | "scheduled" | "paid" | "blocked" | "contest" | "inquire";
 export type DocumentType = "pdf" | "inline" | "link";
 export type SupplierStatus = "Top" | "Regular" | "Periodical" | "Known" | "Unknown" | "Caution";
+export type ValueCaution = "Consistent" | "Regular" | "Review" | "Suspicious" | "Caution";
 
 export interface Vendor {
   id: string;
@@ -24,6 +25,7 @@ export interface Invoice {
   body: string;
   read: boolean;
   starred: boolean;
+  valueCaution: ValueCaution;
 }
 
 export const mockInvoices: Invoice[] = [
@@ -46,6 +48,7 @@ export const mockInvoices: Invoice[] = [
     body: "<h1>Invoice #40291</h1><p>Your monthly subscription for Hubstaff is due.</p>",
     read: false,
     starred: true,
+    valueCaution: "Consistent",
   },
   {
     id: "inv-2",
@@ -66,6 +69,7 @@ export const mockInvoices: Invoice[] = [
     body: "Please find attached the invoice for the Superhuman annual enterprise license for your team of 10.",
     read: true,
     starred: false,
+    valueCaution: "Regular",
   },
   {
     id: "inv-3",
@@ -86,6 +90,7 @@ export const mockInvoices: Invoice[] = [
     body: "Invoice for white-label AI consulting services provided in Q1.",
     read: false,
     starred: false,
+    valueCaution: "Review",
   },
   {
     id: "inv-4",
@@ -106,6 +111,7 @@ export const mockInvoices: Invoice[] = [
     body: "Your Notion Workspace Plus subscription will renew next month.",
     read: true,
     starred: false,
+    valueCaution: "Consistent",
   },
   {
     id: "inv-5",
@@ -126,5 +132,6 @@ export const mockInvoices: Invoice[] = [
     body: "We need more information regarding the EC2 instance spike on Jan 14th before approving this payment.",
     read: true,
     starred: true,
+    valueCaution: "Caution",
   },
 ];
