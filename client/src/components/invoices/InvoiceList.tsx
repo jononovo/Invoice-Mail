@@ -159,11 +159,10 @@ export function InvoiceList({ invoices, selectedId, onSelect }: InvoiceListProps
                   </div>
                   
                   <span className={cn(
-                    "text-xs whitespace-nowrap", 
-                    !invoice.read ? "font-bold" : "",
-                    isSelected && "font-bold text-[#001d35] dark:text-[#e8eaed]"
+                    "text-sm font-mono whitespace-nowrap",
+                    isSelected ? "text-[#0b57d0] dark:text-[#a8c7fa] font-bold" : "text-primary font-medium"
                   )}>
-                    {invoice.dateReceived}
+                    {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(invoice.value)}
                   </span>
                 </div>
                 
@@ -189,16 +188,17 @@ export function InvoiceList({ invoices, selectedId, onSelect }: InvoiceListProps
                           {invoice.valueCaution}
                         </span>
                       )}
-                      <span className={cn(
-                        "text-sm font-mono whitespace-nowrap",
-                        isSelected ? "text-[#0b57d0] dark:text-[#a8c7fa] font-bold" : "text-primary font-medium"
-                      )}>
-                        {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(invoice.value)}
-                      </span>
                     </div>
                   </div>
                   
-                  <div className="flex items-center justify-end mt-1">
+                  <div className="flex items-center justify-between mt-1">
+                    <span className={cn(
+                      "text-xs whitespace-nowrap opacity-70", 
+                      !invoice.read ? "font-bold" : "",
+                      isSelected && "font-bold text-[#001d35] dark:text-[#e8eaed]"
+                    )}>
+                      {invoice.dateReceived}
+                    </span>
                     <span className={cn(
                       "text-[11px] font-medium px-2 py-0.5 rounded-full border border-transparent",
                       invoice.urgency === "High" ? "bg-red-500/15 text-red-600 dark:bg-red-500/20 dark:text-red-300" :
