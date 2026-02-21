@@ -116,6 +116,22 @@ export function InvoiceList({ invoices, selectedId, onSelect }: InvoiceListProps
                   !isSelected && "hover:bg-[#e1e5ea] dark:hover:bg-[#303134] hover:shadow-[inset_1px_0_0_0_#dadce0,-1px_0_0_0_#dadce0_inset]"
                 )}
               >
+                {/* Floating Hover Action Menu */}
+                <div className="absolute right-3 top-3 hidden group-hover:flex items-center gap-1 bg-[#e1e5ea] dark:bg-[#303134] z-10 px-1 py-0.5 rounded shadow-[0_1px_2px_rgba(60,64,67,0.3),0_1px_3px_1px_rgba(60,64,67,0.15)] dark:shadow-[0_1px_2px_rgba(0,0,0,0.3),0_1px_3px_1px_rgba(0,0,0,0.15)]">
+                  <div className="p-1.5 rounded-full hover:bg-black/10 dark:hover:bg-white/10 text-muted-foreground hover:text-foreground transition-colors cursor-pointer" title="Archive">
+                    <Archive className="w-[18px] h-[18px]" />
+                  </div>
+                  <div className="p-1.5 rounded-full hover:bg-black/10 dark:hover:bg-white/10 text-muted-foreground hover:text-foreground transition-colors cursor-pointer" title="Delete">
+                    <Trash2 className="w-[18px] h-[18px]" />
+                  </div>
+                  <div className="p-1.5 rounded-full hover:bg-black/10 dark:hover:bg-white/10 text-muted-foreground hover:text-foreground transition-colors cursor-pointer" title="Mark as unread">
+                    <Mail className="w-[18px] h-[18px]" />
+                  </div>
+                  <div className="p-1.5 rounded-full hover:bg-black/10 dark:hover:bg-white/10 text-muted-foreground hover:text-foreground transition-colors cursor-pointer" title="Snooze">
+                    <Clock className="w-[18px] h-[18px]" />
+                  </div>
+                </div>
+
                 <div className="flex items-center gap-3 mb-1 relative">
                   
                   {/* Drag Handle - shows on hover */}
@@ -159,25 +175,11 @@ export function InvoiceList({ invoices, selectedId, onSelect }: InvoiceListProps
                   
                   <div className="flex items-center">
                     <span className={cn(
-                      "text-sm font-mono whitespace-nowrap group-hover:hidden",
+                      "text-sm font-mono whitespace-nowrap",
                       isSelected ? "text-[#0b57d0] dark:text-[#a8c7fa] font-bold" : "text-primary font-medium"
                     )}>
                       {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(invoice.value)}
                     </span>
-                    <div className="hidden group-hover:flex items-center gap-1">
-                      <div className="p-1.5 rounded-full hover:bg-black/10 dark:hover:bg-white/10 text-muted-foreground hover:text-foreground transition-colors cursor-pointer">
-                        <Archive className="w-4 h-4" />
-                      </div>
-                      <div className="p-1.5 rounded-full hover:bg-black/10 dark:hover:bg-white/10 text-muted-foreground hover:text-foreground transition-colors cursor-pointer">
-                        <Trash2 className="w-4 h-4" />
-                      </div>
-                      <div className="p-1.5 rounded-full hover:bg-black/10 dark:hover:bg-white/10 text-muted-foreground hover:text-foreground transition-colors cursor-pointer">
-                        <Mail className="w-4 h-4" />
-                      </div>
-                      <div className="p-1.5 rounded-full hover:bg-black/10 dark:hover:bg-white/10 text-muted-foreground hover:text-foreground transition-colors cursor-pointer">
-                        <Clock className="w-4 h-4" />
-                      </div>
-                    </div>
                   </div>
                 </div>
                 
