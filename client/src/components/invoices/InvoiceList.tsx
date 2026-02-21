@@ -143,11 +143,6 @@ export function InvoiceList({ invoices, selectedId, onSelect }: InvoiceListProps
                     )}>
                       {invoice.vendor.name}
                     </span>
-                    {invoice.vendor.location && (
-                      <span className="text-[10px] hidden group-hover:inline-block truncate opacity-70">
-                        • {invoice.vendor.location}
-                      </span>
-                    )}
                   </div>
                   
                   <span className={cn(
