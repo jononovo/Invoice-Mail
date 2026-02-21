@@ -113,11 +113,11 @@ export function InvoiceList({ invoices, selectedId, onSelect }: InvoiceListProps
                     : !invoice.read 
                       ? "bg-card dark:bg-[#202124] text-foreground font-bold" 
                       : "bg-[#f2f6fc] dark:bg-[#202124] text-[#444746] dark:text-[#bdc1c6]",
-                  !isSelected && "hover:bg-[#e1e5ea] dark:hover:bg-[#303134] hover:shadow-[inset_1px_0_0_0_#dadce0,-1px_0_0_0_#dadce0_inset]"
+                  !isSelected && "hover:shadow-[inset_1px_0_0_0_#dadce0,-1px_0_0_0_#dadce0_inset,0_1px_2px_0_rgba(60,64,67,0.3),0_1px_3px_1px_rgba(60,64,67,0.15)] dark:hover:shadow-[inset_1px_0_0_0_#5f6368,-1px_0_0_0_#5f6368_inset,0_1px_2px_0_rgba(0,0,0,0.3),0_1px_3px_1px_rgba(0,0,0,0.15)] z-0 hover:z-10 bg-clip-padding"
                 )}
               >
                 {/* Floating Hover Action Menu - Positioned lower right */}
-                <div className="absolute right-3 bottom-3 hidden group-hover:flex items-center gap-1 bg-[#e1e5ea] dark:bg-[#303134] z-10 px-1 py-0.5 rounded shadow-[0_1px_2px_rgba(60,64,67,0.3),0_1px_3px_1px_rgba(60,64,67,0.15)] dark:shadow-[0_1px_2px_rgba(0,0,0,0.3),0_1px_3px_1px_rgba(0,0,0,0.15)]">
+                <div className="absolute right-3 bottom-3 hidden group-hover:flex items-center gap-1 bg-white dark:bg-[#303134] z-10 px-1 py-0.5 rounded shadow-[0_1px_2px_rgba(60,64,67,0.3),0_1px_3px_1px_rgba(60,64,67,0.15)] dark:shadow-[0_1px_2px_rgba(0,0,0,0.3),0_1px_3px_1px_rgba(0,0,0,0.15)]">
                   <div className="p-1.5 rounded-full hover:bg-black/10 dark:hover:bg-white/10 text-muted-foreground hover:text-foreground transition-colors cursor-pointer" title="Archive">
                     <Archive className="w-[18px] h-[18px]" />
                   </div>
