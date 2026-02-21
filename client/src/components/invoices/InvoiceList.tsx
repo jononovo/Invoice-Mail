@@ -15,7 +15,8 @@ import {
   Inbox,
   Users,
   Info,
-  GripVertical
+  GripVertical,
+  Calendar
 } from "lucide-react";
 import { type Invoice } from "@/lib/mock-data";
 import { cn } from "@/lib/utils";
@@ -177,24 +178,19 @@ export function InvoiceList({ invoices, selectedId, onSelect }: InvoiceListProps
                   
                   <div className="flex items-center justify-between mt-1">
                     <div className="flex items-center gap-2">
-                      <Badge variant="outline" className={cn(
-                        "text-[10px] px-1.5 py-0 h-4 border-transparent",
-                        invoice.urgency === "High" && "bg-red-500/15 text-red-600 dark:bg-red-500/20 dark:text-red-300",
-                        invoice.urgency === "Medium" && "bg-amber-500/15 text-amber-700 dark:bg-amber-500/20 dark:text-amber-300",
-                        invoice.urgency === "Low" && "bg-slate-500/15 text-slate-600 dark:bg-slate-500/20 dark:text-slate-300",
+                      <div className={cn(
+                        "flex items-center gap-1.5 text-[11px] font-medium pr-2",
+                        invoice.urgency === "High" ? "text-red-600 dark:text-red-400" :
+                        invoice.urgency === "Medium" ? "text-amber-600 dark:text-amber-500" :
+                        "text-slate-500 dark:text-slate-400"
                       )}>
-                        {invoice.urgency} Urgency
-                      </Badge>
-                      <span className="text-xs truncate opacity-70">
+                        <Calendar className="w-3.5 h-3.5" />
+                        <span>Due in {invoice.urgency === "High" ? "2" : invoice.urgency === "Medium" ? "7" : "14"} days</span>
+                      </div>
+                      <span className="text-xs truncate opacity-70 border-l border-border/50 pl-2">
                         {invoice.documentType.toUpperCase()} Attached
                       </span>
                     </div>
-                    <span className={cn(
-                      "text-xs font-medium",
-                      invoice.status === "inbox" && !isSelected ? "text-destructive dark:text-red-400" : "opacity-80"
-                    )}>
-                      Due: {invoice.dateDue}
-                    </span>
                   </div>
                 </div>
               </div>
