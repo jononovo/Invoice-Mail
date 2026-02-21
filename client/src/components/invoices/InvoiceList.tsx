@@ -208,12 +208,12 @@ export function InvoiceList({ invoices, selectedId, onSelect }: InvoiceListProps
                       )}>
                         Due: {invoice.dateDue}
                       </span>
-                      <Star className={cn(
-                        "w-[16px] h-[16px] ml-2", 
-                        invoice.starred ? "fill-yellow-400 text-yellow-400 opacity-100" : "text-muted-foreground opacity-50 hover:opacity-100",
-                        isSelected && !invoice.starred ? "text-[#001d35] dark:text-[#e8eaed]" : ""
-                      )} />
                     </div>
+                    <Star className={cn(
+                      "w-[16px] h-[16px] flex-shrink-0", 
+                      invoice.starred ? "fill-yellow-400 text-yellow-400 opacity-100" : "text-muted-foreground opacity-50 hover:opacity-100",
+                      isSelected && !invoice.starred ? "text-[#001d35] dark:text-[#e8eaed]" : ""
+                    )} />
                   </div>
                 </div>
               </div>
