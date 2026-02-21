@@ -1,4 +1,21 @@
-import { Star, Square, RotateCw } from "lucide-react";
+import { 
+  Star, 
+  Square, 
+  RotateCw,
+  ChevronDown,
+  Archive,
+  AlertOctagon,
+  Trash2,
+  Mail,
+  Clock,
+  CheckCircle,
+  FolderInput,
+  Tag,
+  MoreVertical,
+  Inbox,
+  Users,
+  Info
+} from "lucide-react";
 import { type Invoice } from "@/lib/mock-data";
 import { cn } from "@/lib/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -12,17 +29,67 @@ interface InvoiceListProps {
 
 export function InvoiceList({ invoices, selectedId, onSelect }: InvoiceListProps) {
   return (
-    <div className="w-[450px] flex-shrink-0 border-r flex flex-col bg-card relative">
-      <div className="h-12 border-b flex items-center px-4 gap-4 text-muted-foreground bg-secondary/30 sticky top-0 z-10">
-        <button className="hover:text-foreground">
+    <div className="w-[450px] lg:w-[500px] flex-shrink-0 border-r flex flex-col bg-card relative">
+      {/* Action Menu Row */}
+      <div className="h-12 border-b flex items-center px-4 gap-1 text-muted-foreground bg-secondary/30 sticky top-0 z-10">
+        <div className="flex items-center gap-0.5 hover:bg-secondary/50 rounded px-1.5 py-1.5 cursor-pointer mr-2">
           <Square className="w-4 h-4" />
+          <ChevronDown className="w-3 h-3" />
+        </div>
+        <button className="hover:text-foreground hover:bg-secondary/50 p-1.5 rounded">
+          <Archive className="w-4 h-4" />
         </button>
-        <button className="hover:text-foreground">
-          <RotateCw className="w-4 h-4" />
+        <button className="hover:text-foreground hover:bg-secondary/50 p-1.5 rounded">
+          <AlertOctagon className="w-4 h-4" />
         </button>
+        <button className="hover:text-foreground hover:bg-secondary/50 p-1.5 rounded">
+          <Trash2 className="w-4 h-4" />
+        </button>
+        <div className="w-[1px] h-4 bg-border mx-1"></div>
+        <button className="hover:text-foreground hover:bg-secondary/50 p-1.5 rounded">
+          <Mail className="w-4 h-4" />
+        </button>
+        <button className="hover:text-foreground hover:bg-secondary/50 p-1.5 rounded">
+          <Clock className="w-4 h-4" />
+        </button>
+        <button className="hover:text-foreground hover:bg-secondary/50 p-1.5 rounded">
+          <CheckCircle className="w-4 h-4" />
+        </button>
+        <div className="w-[1px] h-4 bg-border mx-1"></div>
+        <button className="hover:text-foreground hover:bg-secondary/50 p-1.5 rounded">
+          <FolderInput className="w-4 h-4" />
+        </button>
+        <button className="hover:text-foreground hover:bg-secondary/50 p-1.5 rounded">
+          <Tag className="w-4 h-4" />
+        </button>
+        <button className="hover:text-foreground hover:bg-secondary/50 p-1.5 rounded">
+          <MoreVertical className="w-4 h-4" />
+        </button>
+        
         <div className="ml-auto text-xs font-medium">
           1-{invoices.length} of {invoices.length}
         </div>
+      </div>
+
+      {/* Tabs Row */}
+      <div className="flex border-b border-border/50 bg-secondary/10 overflow-x-auto no-scrollbar">
+        <button className="flex items-center gap-2 px-4 py-3 border-b-2 border-primary text-primary font-medium text-sm whitespace-nowrap min-w-max">
+          <Inbox className="w-4 h-4" />
+          Primary
+          <Badge variant="default" className="ml-1 h-5 px-1.5 py-0 text-[10px] rounded-full">1 new</Badge>
+        </button>
+        <button className="flex items-center gap-2 px-4 py-3 border-b-2 border-transparent text-muted-foreground hover:bg-secondary/30 text-sm transition-colors whitespace-nowrap min-w-max">
+          <Tag className="w-4 h-4" />
+          Promotions
+        </button>
+        <button className="flex items-center gap-2 px-4 py-3 border-b-2 border-transparent text-muted-foreground hover:bg-secondary/30 text-sm transition-colors whitespace-nowrap min-w-max">
+          <Users className="w-4 h-4" />
+          Social
+        </button>
+        <button className="flex items-center gap-2 px-4 py-3 border-b-2 border-transparent text-muted-foreground hover:bg-secondary/30 text-sm transition-colors whitespace-nowrap min-w-max">
+          <Info className="w-4 h-4" />
+          Updates
+        </button>
       </div>
       
       <div className="flex-1 overflow-y-auto">
