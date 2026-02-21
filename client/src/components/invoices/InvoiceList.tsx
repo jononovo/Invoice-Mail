@@ -106,14 +106,21 @@ export function InvoiceList({ invoices, selectedId, onSelect }: InvoiceListProps
                 onClick={() => onSelect(invoice.id)}
                 className={cn(
                   "group flex flex-col border-b border-border/50 p-3 cursor-pointer transition-colors relative",
-                  isSelected ? "bg-primary/10 shadow-[inset_3px_0_0_0_hsl(var(--primary))]" : "hover:bg-secondary/50",
-                  !invoice.read && !isSelected ? "bg-card" : ""
+                  isSelected 
+                    ? "bg-[#c2e7ff] dark:bg-[#414549] text-[#001d35] dark:text-[#e8eaed]" 
+                    : !invoice.read 
+                      ? "bg-card dark:bg-[#202124] text-foreground font-bold" 
+                      : "bg-[#f2f6fc] dark:bg-[#202124] text-[#444746] dark:text-[#bdc1c6]",
+                  !isSelected && "hover:bg-[#e1e5ea] dark:hover:bg-[#303134] hover:shadow-[inset_1px_0_0_0_#dadce0,-1px_0_0_0_#dadce0_inset]"
                 )}
               >
                 <div className="flex items-center gap-3 mb-1">
-                  <div className="flex gap-2 text-muted-foreground opacity-50 group-hover:opacity-100 transition-opacity">
-                    <Square className="w-4 h-4" />
-                    <Star className={cn("w-4 h-4", invoice.starred && "fill-yellow-400 text-yellow-400 opacity-100")} />
+                  <div className={cn(
+                    "flex gap-2 transition-opacity",
+                    !isSelected && invoice.read ? "opacity-50 group-hover:opacity-100" : ""
+                  )}>
+                    <Square className={cn("w-4 h-4", isSelected ? "text-[#0b57d0] dark:text-[#a8c7fa]" : "")} />
+                    <Star className={cn("w-4 h-4", invoice.starred ? "fill-yellow-400 text-yellow-400 opacity-100" : isSelected ? "text-[#0b57d0] dark:text-[#a8c7fa]" : "")} />
                   </div>
                   
                   <div className="flex items-center gap-2 overflow-hidden flex-1">
@@ -121,43 +128,61 @@ export function InvoiceList({ invoices, selectedId, onSelect }: InvoiceListProps
                       <AvatarImage src={invoice.vendor.logo} />
                       <AvatarFallback className="text-[10px] rounded-sm">{invoice.vendor.name[0]}</AvatarFallback>
                     </Avatar>
-                    <span className={cn("truncate text-sm", !invoice.read ? "font-bold text-foreground" : "text-muted-foreground")}>
+                    <span className={cn(
+                      "truncate text-sm", 
+                      !invoice.read ? "font-bold" : "",
+                      isSelected && "font-bold text-[#001d35] dark:text-[#e8eaed]"
+                    )}>
                       {invoice.vendor.name}
                     </span>
                     {invoice.vendor.location && (
-                      <span className="text-[10px] text-muted-foreground hidden group-hover:inline-block truncate">
+                      <span className="text-[10px] hidden group-hover:inline-block truncate opacity-70">
                         • {invoice.vendor.location}
                       </span>
                     )}
                   </div>
                   
-                  <span className={cn("text-xs whitespace-nowrap", !invoice.read ? "font-bold text-foreground" : "text-muted-foreground")}>
+                  <span className={cn(
+                    "text-xs whitespace-nowrap", 
+                    !invoice.read ? "font-bold" : "",
+                    isSelected && "font-bold text-[#001d35] dark:text-[#e8eaed]"
+                  )}>
                     {invoice.dateReceived}
                   </span>
                 </div>
                 
                 <div className="pl-9 flex flex-col gap-1">
                   <div className="flex items-center justify-between gap-2">
-                    <span className={cn("text-sm truncate", !invoice.read ? "font-bold text-foreground" : "text-foreground")}>
+                    <span className={cn(
+                      "text-sm truncate", 
+                      !invoice.read ? "font-bold" : "",
+                      isSelected && "font-bold text-[#001d35] dark:text-[#e8eaed]"
+                    )}>
                       {invoice.purpose}
                     </span>
-                    <span className="text-sm font-mono font-medium whitespace-nowrap text-primary">
+                    <span className={cn(
+                      "text-sm font-mono whitespace-nowrap",
+                      isSelected ? "text-[#0b57d0] dark:text-[#a8c7fa] font-bold" : "text-primary font-medium"
+                    )}>
                       {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(invoice.value)}
                     </span>
                   </div>
                   
                   <div className="flex items-center justify-between mt-1">
                     <div className="flex items-center gap-2">
-                      <Badge variant={invoice.urgency === "High" ? "destructive" : invoice.urgency === "Medium" ? "secondary" : "outline"} className="text-[10px] px-1.5 py-0 h-4">
+                      <Badge variant={invoice.urgency === "High" ? "destructive" : invoice.urgency === "Medium" ? "secondary" : "outline"} className={cn(
+                        "text-[10px] px-1.5 py-0 h-4",
+                        isSelected && invoice.urgency !== "High" && "bg-black/10 dark:bg-white/10 text-current border-transparent"
+                      )}>
                         {invoice.urgency} Urgency
                       </Badge>
-                      <span className="text-xs text-muted-foreground truncate opacity-70">
+                      <span className="text-xs truncate opacity-70">
                         {invoice.documentType.toUpperCase()} Attached
                       </span>
                     </div>
                     <span className={cn(
                       "text-xs font-medium",
-                      invoice.status === "inbox" ? "text-destructive" : "text-muted-foreground"
+                      invoice.status === "inbox" && !isSelected ? "text-destructive dark:text-red-400" : "opacity-80"
                     )}>
                       Due: {invoice.dateDue}
                     </span>
