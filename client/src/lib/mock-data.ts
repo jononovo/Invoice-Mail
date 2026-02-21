@@ -1,12 +1,14 @@
 export type Urgency = "High" | "Medium" | "Low";
 export type InvoiceStatus = "inbox" | "scheduled" | "paid" | "blocked" | "contest" | "inquire";
 export type DocumentType = "pdf" | "inline" | "link";
+export type SupplierStatus = "Top" | "Regular" | "Periodical" | "Known" | "Unknown" | "Caution";
 
 export interface Vendor {
   id: string;
   name: string;
   logo: string;
   location?: string;
+  status: SupplierStatus;
 }
 
 export interface Invoice {
@@ -32,6 +34,7 @@ export const mockInvoices: Invoice[] = [
       name: "Hubstaff",
       logo: "https://logo.clearbit.com/hubstaff.com",
       location: "San Francisco, CA",
+      status: "Regular",
     },
     purpose: "Monthly Team Time Tracking & Payroll",
     value: 450.0,
@@ -51,6 +54,7 @@ export const mockInvoices: Invoice[] = [
       name: "Superhuman",
       logo: "https://logo.clearbit.com/superhuman.com",
       location: "San Francisco, CA",
+      status: "Periodical",
     },
     purpose: "Annual Enterprise License",
     value: 3600.0,
@@ -70,6 +74,7 @@ export const mockInvoices: Invoice[] = [
       name: "Polsia",
       logo: "https://logo.clearbit.com/stripe.com", // dummy logo
       location: "Austin, TX",
+      status: "Top",
     },
     purpose: "Q1 Consulting Retainer",
     value: 12500.0,
@@ -89,6 +94,7 @@ export const mockInvoices: Invoice[] = [
       name: "Notion",
       logo: "https://logo.clearbit.com/notion.so",
       location: "San Francisco, CA",
+      status: "Known",
     },
     purpose: "Workspace Plus - 15 Seats",
     value: 300.0,
@@ -108,6 +114,7 @@ export const mockInvoices: Invoice[] = [
       name: "AWS",
       logo: "https://logo.clearbit.com/aws.amazon.com",
       location: "Seattle, WA",
+      status: "Caution",
     },
     purpose: "Cloud Infrastructure Usage - Jan",
     value: 840.50,

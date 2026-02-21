@@ -143,6 +143,19 @@ export function InvoiceList({ invoices, selectedId, onSelect }: InvoiceListProps
                     )}>
                       {invoice.vendor.name}
                     </span>
+                    {invoice.vendor.status && (
+                      <span className={cn(
+                        "hidden group-hover:inline-flex items-center text-[9px] font-medium px-1.5 py-0 h-4 rounded border whitespace-nowrap",
+                        invoice.vendor.status === "Top" ? "bg-purple-500/10 text-purple-700 border-purple-200 dark:bg-purple-500/20 dark:text-purple-300 dark:border-purple-500/30" :
+                        invoice.vendor.status === "Regular" ? "bg-blue-500/10 text-blue-700 border-blue-200 dark:bg-blue-500/20 dark:text-blue-300 dark:border-blue-500/30" :
+                        invoice.vendor.status === "Periodical" ? "bg-teal-500/10 text-teal-700 border-teal-200 dark:bg-teal-500/20 dark:text-teal-300 dark:border-teal-500/30" :
+                        invoice.vendor.status === "Known" ? "bg-slate-500/10 text-slate-700 border-slate-200 dark:bg-slate-500/20 dark:text-slate-300 dark:border-slate-500/30" :
+                        invoice.vendor.status === "Unknown" ? "bg-orange-500/10 text-orange-700 border-orange-200 dark:bg-orange-500/20 dark:text-orange-300 dark:border-orange-500/30" :
+                        "bg-red-500/10 text-red-700 border-red-200 dark:bg-red-500/20 dark:text-red-300 dark:border-red-500/30"
+                      )}>
+                        {invoice.vendor.status}
+                      </span>
+                    )}
                   </div>
                   
                   <span className={cn(
