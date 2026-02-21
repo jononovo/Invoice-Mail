@@ -59,20 +59,20 @@ export function Sidebar({ activeFolder, onFolderChange }: SidebarProps) {
               className={cn(
                 "flex items-center justify-between px-4 py-2 rounded-r-full mr-2 transition-colors",
                 isActive 
-                  ? "bg-primary/20 text-primary-foreground font-semibold" 
-                  : "text-foreground hover:bg-secondary/50"
+                  ? "bg-[#d3e3fd] dark:bg-[#414549] text-[#001d35] dark:text-[#e8eaed] font-semibold" 
+                  : "text-[#444746] dark:text-[#e8eaed] hover:bg-black/5 dark:hover:bg-white/5"
               )}
             >
               <div className="flex items-center gap-4">
-                <Icon className={cn("w-5 h-5", isActive ? "text-primary text-opacity-100" : "text-muted-foreground")} />
-                <span>{item.label}</span>
+                <Icon className={cn("w-[18px] h-[18px]", isActive ? "text-[#001d35] dark:text-[#e8eaed]" : "text-[#444746] dark:text-[#e8eaed]")} />
+                <span className="text-[14px]">{item.label}</span>
               </div>
               {item.count > 0 && (
                 <div className="flex items-baseline gap-1 text-xs ml-auto">
-                  <span className={cn("font-mono tracking-tight", isActive ? "text-[#0b57d0] dark:text-[#a8c7fa] font-bold" : "text-foreground font-medium")}>
+                  <span className={cn("font-medium tracking-tight", isActive ? "text-[#001d35] dark:text-[#e8eaed] font-bold" : "text-[#444746] dark:text-[#e8eaed]")}>
                     {item.value}
                   </span>
-                  <span className="text-[10px] text-muted-foreground font-medium">
+                  <span className={cn("text-[11px]", isActive ? "text-[#001d35]/70 dark:text-[#e8eaed]/70 font-medium" : "text-[#444746]/70 dark:text-[#e8eaed]/70")}>
                     /{item.count}
                   </span>
                 </div>
