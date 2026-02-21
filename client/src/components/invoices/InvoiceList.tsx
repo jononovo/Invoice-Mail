@@ -142,7 +142,7 @@ export function InvoiceList({ invoices, selectedId, onSelect }: InvoiceListProps
                 <div className="flex items-center gap-3 mb-1 relative">
                   
                   {/* Drag Handle - shows on hover */}
-                  <div className="absolute -left-2 top-[1px] opacity-0 group-hover:opacity-100 transition-opacity cursor-grab text-[#cccccc] dark:text-[#5f6368] hover:text-[#444746] dark:hover:text-[#e8eaed]">
+                  <div className="absolute -left-2 top-[1px] opacity-0 group-hover:opacity-100 transition-opacity cursor-grab active:cursor-grabbing text-[#cccccc] dark:text-[#5f6368] hover:text-[#444746] dark:hover:text-[#e8eaed]">
                     <GripVertical className="w-[18px] h-[18px]" strokeWidth={2.5} />
                   </div>
                   
