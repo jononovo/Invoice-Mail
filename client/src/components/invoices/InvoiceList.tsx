@@ -192,22 +192,24 @@ export function InvoiceList({ invoices, selectedId, onSelect }: InvoiceListProps
                   </div>
                   
                   <div className="flex items-center justify-between mt-1">
-                    <span className={cn(
-                      "text-xs whitespace-nowrap opacity-70", 
-                      !invoice.read ? "font-bold" : "",
-                      isSelected && "font-bold text-[#001d35] dark:text-[#e8eaed]"
-                    )}>
-                      {invoice.dateReceived}
-                    </span>
-                    <span className={cn(
-                      "text-[11px] font-medium px-2 py-0.5 rounded-full border border-transparent",
-                      invoice.urgency === "High" ? "bg-red-500/15 text-red-600 dark:bg-red-500/20 dark:text-red-300" :
-                      invoice.urgency === "Medium" ? "bg-amber-500/15 text-amber-700 dark:bg-amber-500/20 dark:text-amber-300" :
-                      "bg-slate-500/15 text-slate-600 dark:bg-slate-500/20 dark:text-slate-300",
-                      isSelected && invoice.urgency !== "High" && "bg-black/10 dark:bg-white/10 text-current"
-                    )}>
-                      Due: {invoice.dateDue}
-                    </span>
+                    <div className="flex items-center gap-2">
+                      <span className={cn(
+                        "text-xs whitespace-nowrap opacity-70", 
+                        !invoice.read ? "font-bold" : "",
+                        isSelected && "font-bold text-[#001d35] dark:text-[#e8eaed]"
+                      )}>
+                        {invoice.dateReceived}
+                      </span>
+                      <span className={cn(
+                        "text-[11px] font-medium px-2 py-0.5 rounded-full border border-transparent",
+                        invoice.urgency === "High" ? "bg-red-500/15 text-red-600 dark:bg-red-500/20 dark:text-red-300" :
+                        invoice.urgency === "Medium" ? "bg-amber-500/15 text-amber-700 dark:bg-amber-500/20 dark:text-amber-300" :
+                        "bg-slate-500/15 text-slate-600 dark:bg-slate-500/20 dark:text-slate-300",
+                        isSelected && invoice.urgency !== "High" && "bg-black/10 dark:bg-white/10 text-current"
+                      )}>
+                        Due: {invoice.dateDue}
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
