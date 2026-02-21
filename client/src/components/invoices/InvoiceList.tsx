@@ -107,7 +107,7 @@ export function InvoiceList({ invoices, selectedId, onSelect }: InvoiceListProps
                 className={cn(
                   "group flex flex-col border-b border-border/50 p-3 cursor-pointer transition-colors relative",
                   isSelected 
-                    ? "bg-[#c2e7ff] dark:bg-[#414549] text-[#001d35] dark:text-[#e8eaed]" 
+                    ? "bg-[#d3e3fd] dark:bg-[#414549] text-[#001d35] dark:text-[#e8eaed]" 
                     : !invoice.read 
                       ? "bg-card dark:bg-[#202124] text-foreground font-bold" 
                       : "bg-[#f2f6fc] dark:bg-[#202124] text-[#444746] dark:text-[#bdc1c6]",
