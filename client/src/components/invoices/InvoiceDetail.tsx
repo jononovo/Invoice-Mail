@@ -59,6 +59,9 @@ export function InvoiceDetail({ invoice }: { invoice: Invoice }) {
             </h1>
             <div className="px-2 py-0.5 rounded bg-secondary text-xs text-muted-foreground ml-2">External</div>
             <div className="px-2 py-0.5 rounded bg-secondary text-xs text-muted-foreground">Inbox x</div>
+            <div className="px-2 py-0.5 rounded bg-secondary text-xs text-muted-foreground uppercase opacity-80 border border-border/50">
+              {invoice.documentType} Attached
+            </div>
           </div>
           
           <div className="flex items-start justify-between">

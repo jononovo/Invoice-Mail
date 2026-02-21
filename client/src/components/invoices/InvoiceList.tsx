@@ -176,12 +176,7 @@ export function InvoiceList({ invoices, selectedId, onSelect }: InvoiceListProps
                     </span>
                   </div>
                   
-                  <div className="flex items-center justify-between mt-1">
-                    <div className="flex items-center gap-2">
-                      <span className="text-xs truncate opacity-70">
-                        {invoice.documentType.toUpperCase()} Attached
-                      </span>
-                    </div>
+                  <div className="flex items-center justify-end mt-1">
                     <span className={cn(
                       "text-[11px] font-medium px-2 py-0.5 rounded-full border border-transparent",
                       invoice.urgency === "High" ? "bg-red-500/15 text-red-600 dark:bg-red-500/20 dark:text-red-300" :
