@@ -178,21 +178,16 @@ export function InvoiceList({ invoices, selectedId, onSelect }: InvoiceListProps
                   
                   <div className="flex items-center justify-between mt-1">
                     <div className="flex items-center gap-2">
-                      <Badge variant="outline" className={cn(
-                        "text-[10px] px-1.5 py-0 h-4 border-transparent",
-                        invoice.urgency === "High" && "bg-red-500/15 text-red-600 dark:bg-red-500/20 dark:text-red-300",
-                        invoice.urgency === "Medium" && "bg-amber-500/15 text-amber-700 dark:bg-amber-500/20 dark:text-amber-300",
-                        invoice.urgency === "Low" && "bg-slate-500/15 text-slate-600 dark:bg-slate-500/20 dark:text-slate-300",
-                      )}>
-                        {invoice.urgency} Urgency
-                      </Badge>
                       <span className="text-xs truncate opacity-70">
                         {invoice.documentType.toUpperCase()} Attached
                       </span>
                     </div>
                     <span className={cn(
-                      "text-xs font-medium",
-                      invoice.status === "inbox" && !isSelected ? "text-destructive dark:text-red-400" : "opacity-80"
+                      "text-[11px] font-medium px-2 py-0.5 rounded-full border border-transparent",
+                      invoice.urgency === "High" ? "bg-red-500/15 text-red-600 dark:bg-red-500/20 dark:text-red-300" :
+                      invoice.urgency === "Medium" ? "bg-amber-500/15 text-amber-700 dark:bg-amber-500/20 dark:text-amber-300" :
+                      "bg-slate-500/15 text-slate-600 dark:bg-slate-500/20 dark:text-slate-300",
+                      isSelected && invoice.urgency !== "High" && "bg-black/10 dark:bg-white/10 text-current"
                     )}>
                       Due: {invoice.dateDue}
                     </span>
