@@ -157,12 +157,28 @@ export function InvoiceList({ invoices, selectedId, onSelect }: InvoiceListProps
                     )}
                   </div>
                   
-                  <span className={cn(
-                    "text-sm font-mono whitespace-nowrap",
-                    isSelected ? "text-[#0b57d0] dark:text-[#a8c7fa] font-bold" : "text-primary font-medium"
-                  )}>
-                    {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(invoice.value)}
-                  </span>
+                  <div className="flex items-center">
+                    <span className={cn(
+                      "text-sm font-mono whitespace-nowrap group-hover:hidden",
+                      isSelected ? "text-[#0b57d0] dark:text-[#a8c7fa] font-bold" : "text-primary font-medium"
+                    )}>
+                      {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(invoice.value)}
+                    </span>
+                    <div className="hidden group-hover:flex items-center gap-1">
+                      <div className="p-1.5 rounded-full hover:bg-black/10 dark:hover:bg-white/10 text-muted-foreground hover:text-foreground transition-colors cursor-pointer">
+                        <Archive className="w-4 h-4" />
+                      </div>
+                      <div className="p-1.5 rounded-full hover:bg-black/10 dark:hover:bg-white/10 text-muted-foreground hover:text-foreground transition-colors cursor-pointer">
+                        <Trash2 className="w-4 h-4" />
+                      </div>
+                      <div className="p-1.5 rounded-full hover:bg-black/10 dark:hover:bg-white/10 text-muted-foreground hover:text-foreground transition-colors cursor-pointer">
+                        <Mail className="w-4 h-4" />
+                      </div>
+                      <div className="p-1.5 rounded-full hover:bg-black/10 dark:hover:bg-white/10 text-muted-foreground hover:text-foreground transition-colors cursor-pointer">
+                        <Clock className="w-4 h-4" />
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 
                 <div className="pl-9 flex flex-col gap-1">
