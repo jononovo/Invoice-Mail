@@ -1,5 +1,5 @@
 export type Urgency = "High" | "Medium" | "Low";
-export type InvoiceStatus = "inbox" | "scheduled" | "paid" | "blocked" | "contest" | "inquire";
+export type InvoiceStatus = "inbox" | "scheduled" | "paid" | "blocked" | "contest" | "inquire" | "flagged";
 export type DocumentType = "pdf" | "inline" | "link";
 export type SupplierStatus = "Top" | "Regular" | "Periodical" | "Known" | "Unknown" | "Caution";
 export type ValueCaution = "Consistent" | "Regular" | "Review" | "Suspicious" | "Caution";
