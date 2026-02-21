@@ -41,8 +41,8 @@ export function Sidebar({ activeFolder, onFolderChange }: SidebarProps) {
     { id: 'scheduled' as const, label: 'Scheduled', icon: Clock, count: scheduledStats.count, value: scheduledStats.value },
     { id: 'paid' as const, label: 'Paid', icon: Send, count: paidStats.count, value: paidStats.value },
     { id: 'blocked' as const, label: 'Blocked', icon: FileBox, count: blockedStats.count, value: blockedStats.value },
-    { id: 'contest' as const, label: 'Contest', icon: ShieldAlert, count: contestStats.count, value: contestStats.value },
     { id: 'inquire' as const, label: 'Inquire', icon: MessageSquare, count: inquireStats.count, value: inquireStats.value },
+    { id: 'contest' as const, label: 'Contest', icon: ShieldAlert, count: contestStats.count, value: contestStats.value },
   ];
 
   return (
