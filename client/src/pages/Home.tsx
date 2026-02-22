@@ -23,6 +23,11 @@ export default function Home() {
     setInvoices(prev => prev.map(inv => ids.includes(inv.id) ? { ...inv, read } : inv));
   };
 
+  const handleSelectInvoice = (id: string) => {
+    setSelectedInvoiceId(id);
+    handleToggleRead([id], true);
+  };
+
   return (
     <div className="flex flex-col h-screen w-full bg-background">
       <Header />
@@ -38,7 +43,7 @@ export default function Home() {
           <InvoiceList 
             invoices={filteredInvoices}
             selectedId={selectedInvoiceId}
-            onSelect={setSelectedInvoiceId}
+            onSelect={handleSelectInvoice}
             onToggleRead={handleToggleRead}
           />
           {selectedInvoice ? (
