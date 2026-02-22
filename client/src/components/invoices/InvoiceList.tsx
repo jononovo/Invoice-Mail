@@ -298,7 +298,7 @@ export function InvoiceList({ invoices, selectedId, onSelect, onToggleRead }: In
                   <div className="flex items-center">
                     <span className={cn(
                       "text-sm font-mono whitespace-nowrap",
-                      !invoice.read ? "text-[#0b57d0] dark:text-[#a8c7fa] font-bold" : "text-primary font-medium"
+                      !invoice.read ? "text-[#001d35] dark:text-[#e8eaed] font-bold" : "text-[#444746] dark:text-[#bdc1c6] font-medium"
                     )}>
                       {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(invoice.value)}
                     </span>
