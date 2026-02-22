@@ -60,6 +60,7 @@ interface InvoiceListProps {
 
 export function InvoiceList({ invoices, selectedId, onSelect, onToggleRead }: InvoiceListProps) {
   const [checkedIds, setCheckedIds] = useState<Set<string>>(new Set());
+  const [activeTab, setActiveTab] = useState<string>("Primary");
 
   const handleCheck = (e: React.MouseEvent, id: string) => {
     e.stopPropagation();
@@ -95,6 +96,30 @@ export function InvoiceList({ invoices, selectedId, onSelect, onToggleRead }: In
 
   const hasChecked = checkedIds.size > 0;
   const CheckIcon = hasChecked ? CheckSquare : Square;
+
+  const getFilteredInvoices = () => {
+    switch (activeTab) {
+      case "Regular":
+        return invoices.filter(inv => inv.vendor.status === "Regular" || inv.vendor.status === "Top" || inv.vendor.status === "Periodical");
+      case "Urgent":
+        return invoices.filter(inv => {
+          if (!inv.dateDue) return false;
+          // Basic check for urgency < 4 days, assuming dates are like "Feb 25"
+          const dueDate = new Date(`${inv.dateDue} ${new Date().getFullYear()}`);
+          const today = new Date();
+          const diffTime = Math.abs(dueDate.getTime() - today.getTime());
+          const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+          return diffDays < 4 || inv.urgency === "High";
+        });
+      case "Caution":
+        return invoices.filter(inv => inv.valueCaution === "Suspicious" || inv.valueCaution === "Caution" || inv.vendor.status === "Unknown" || inv.vendor.status === "Caution");
+      case "Primary":
+      default:
+        return invoices;
+    }
+  };
+
+  const filteredInvoices = getFilteredInvoices();
 
   return (
     <div className="w-[450px] lg:w-[500px] flex-shrink-0 border-r flex flex-col bg-card relative">
@@ -177,32 +202,44 @@ export function InvoiceList({ invoices, selectedId, onSelect, onToggleRead }: In
 
       {/* Tabs Row */}
       <div className="flex border-b border-border/50 bg-secondary/10 overflow-x-auto no-scrollbar">
-        <button className="flex items-center gap-2 px-4 py-3 border-b-2 border-primary text-primary font-medium text-sm whitespace-nowrap min-w-max">
+        <button 
+          className={cn("flex items-center gap-2 px-4 py-3 border-b-2 text-sm whitespace-nowrap min-w-max transition-colors", activeTab === "Primary" ? "border-primary text-primary font-medium" : "border-transparent text-muted-foreground hover:bg-secondary/30")}
+          onClick={() => setActiveTab("Primary")}
+        >
           <Inbox className="w-4 h-4" />
           Primary
           <Badge variant="outline" className="ml-1 h-5 px-1.5 py-0 text-[10px] rounded-full bg-primary/10 text-primary border-transparent">1 new</Badge>
         </button>
-        <button className="flex items-center gap-2 px-4 py-3 border-b-2 border-transparent text-muted-foreground hover:bg-secondary/30 text-sm transition-colors whitespace-nowrap min-w-max">
+        <button 
+          className={cn("flex items-center gap-2 px-4 py-3 border-b-2 text-sm whitespace-nowrap min-w-max transition-colors", activeTab === "Regular" ? "border-primary text-primary font-medium" : "border-transparent text-muted-foreground hover:bg-secondary/30")}
+          onClick={() => setActiveTab("Regular")}
+        >
           <Tag className="w-4 h-4" />
-          Promotions
+          Regular
         </button>
-        <button className="flex items-center gap-2 px-4 py-3 border-b-2 border-transparent text-muted-foreground hover:bg-secondary/30 text-sm transition-colors whitespace-nowrap min-w-max">
-          <Users className="w-4 h-4" />
-          Social
+        <button 
+          className={cn("flex items-center gap-2 px-4 py-3 border-b-2 text-sm whitespace-nowrap min-w-max transition-colors", activeTab === "Urgent" ? "border-primary text-primary font-medium" : "border-transparent text-muted-foreground hover:bg-secondary/30")}
+          onClick={() => setActiveTab("Urgent")}
+        >
+          <Clock className="w-4 h-4" />
+          Urgent
         </button>
-        <button className="flex items-center gap-2 px-4 py-3 border-b-2 border-transparent text-muted-foreground hover:bg-secondary/30 text-sm transition-colors whitespace-nowrap min-w-max">
-          <Info className="w-4 h-4" />
-          Updates
+        <button 
+          className={cn("flex items-center gap-2 px-4 py-3 border-b-2 text-sm whitespace-nowrap min-w-max transition-colors", activeTab === "Caution" ? "border-primary text-primary font-medium" : "border-transparent text-muted-foreground hover:bg-secondary/30")}
+          onClick={() => setActiveTab("Caution")}
+        >
+          <AlertOctagon className="w-4 h-4" />
+          Caution
         </button>
       </div>
       
       <div className="flex-1 overflow-y-auto">
-        {invoices.length === 0 ? (
+        {filteredInvoices.length === 0 ? (
           <div className="p-8 text-center text-muted-foreground">
             No invoices here!
           </div>
         ) : (
-          invoices.map((invoice) => {
+          filteredInvoices.map((invoice) => {
             const isSelected = selectedId === invoice.id;
             return (
               <div 
