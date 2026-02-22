@@ -339,10 +339,10 @@ export function InvoiceList({ invoices, selectedId, onSelect, onToggleRead }: In
                       </span>
                       <span className={cn(
                         "text-[11px] font-medium px-2 py-0.5 rounded-full border border-transparent",
-                        invoice.urgency === "High" ? "bg-red-500/15 text-red-600 dark:bg-red-500/20 dark:text-red-300" :
-                        invoice.urgency === "Medium" ? "bg-amber-500/15 text-amber-700 dark:bg-amber-500/20 dark:text-amber-300" :
-                        "bg-slate-500/15 text-slate-600 dark:bg-slate-500/20 dark:text-slate-300",
-                        isSelected && invoice.urgency !== "High" && "bg-black/10 dark:bg-white/10 text-current"
+                        invoice.urgency === "High" ? "bg-red-500/15 text-[#444746] dark:bg-red-500/20 dark:text-[#bdc1c6]" :
+                        invoice.urgency === "Medium" ? "bg-amber-500/15 text-[#444746] dark:bg-amber-500/20 dark:text-[#bdc1c6]" :
+                        "bg-slate-500/15 text-[#444746] dark:bg-slate-500/20 dark:text-[#bdc1c6]",
+                        isSelected && invoice.urgency !== "High" && "bg-black/10 dark:bg-white/10"
                       )}>
                         Due: {invoice.dateDue}
                       </span>
