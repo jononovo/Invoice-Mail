@@ -281,17 +281,37 @@ export function InvoiceList({ invoices, selectedId, onSelect, onToggleRead }: In
                       {invoice.vendor.name}
                     </span>
                     {invoice.vendor.status && (
-                      <span className={cn(
-                        "hidden group-hover:inline-flex items-center text-[9px] font-medium px-1.5 py-0 h-4 rounded border whitespace-nowrap",
-                        invoice.vendor.status === "Top" ? "bg-purple-500/10 text-purple-700 border-purple-200 dark:bg-purple-500/20 dark:text-purple-300 dark:border-purple-500/30" :
-                        invoice.vendor.status === "Regular" ? "bg-blue-500/10 text-blue-700 border-blue-200 dark:bg-blue-500/20 dark:text-blue-300 dark:border-blue-500/30" :
-                        invoice.vendor.status === "Periodical" ? "bg-teal-500/10 text-teal-700 border-teal-200 dark:bg-teal-500/20 dark:text-teal-300 dark:border-teal-500/30" :
-                        invoice.vendor.status === "Known" ? "bg-slate-500/10 text-slate-700 border-slate-200 dark:bg-slate-500/20 dark:text-slate-300 dark:border-slate-500/30" :
-                        invoice.vendor.status === "Unknown" ? "bg-orange-500/10 text-orange-700 border-orange-200 dark:bg-orange-500/20 dark:text-orange-300 dark:border-orange-500/30" :
-                        "bg-red-500/10 text-red-700 border-red-200 dark:bg-red-500/20 dark:text-red-300 dark:border-red-500/30"
-                      )}>
-                        {invoice.vendor.status}
-                      </span>
+                      <div 
+                        className="group/tooltip relative flex items-center"
+                      >
+                        <span className={cn(
+                          "hidden group-hover:inline-flex items-center text-[9px] font-medium px-1.5 py-0 h-4 rounded border whitespace-nowrap",
+                          invoice.vendor.status === "Top" ? "bg-slate-100 text-slate-800 border-slate-200 dark:bg-slate-800/50 dark:text-slate-300 dark:border-slate-700" :
+                          invoice.vendor.status === "Regular" ? "bg-green-500/10 text-green-700 border-green-200 dark:bg-green-500/20 dark:text-green-300 dark:border-green-500/30" :
+                          invoice.vendor.status === "Periodical" ? "bg-blue-500/10 text-blue-700 border-blue-200 dark:bg-blue-500/20 dark:text-blue-300 dark:border-blue-500/30" :
+                          invoice.vendor.status === "Known" ? "bg-purple-500/10 text-purple-700 border-purple-200 dark:bg-purple-500/20 dark:text-purple-300 dark:border-purple-500/30" :
+                          invoice.vendor.status === "Unknown" ? "bg-orange-500/10 text-orange-700 border-orange-200 dark:bg-orange-500/20 dark:text-orange-300 dark:border-orange-500/30" :
+                          "bg-red-500/10 text-red-700 border-red-200 dark:bg-red-500/20 dark:text-red-300 dark:border-red-500/30"
+                        )}>
+                          {invoice.vendor.status}
+                        </span>
+                        
+                        {/* Tooltip */}
+                        <div className="absolute left-1/2 -translate-x-1/2 bottom-full mb-1 hidden group-hover/tooltip:block z-50">
+                          <div className="bg-black/80 backdrop-blur-sm text-white text-[11px] px-2.5 py-1.5 rounded-md whitespace-nowrap shadow-xl flex flex-col items-center">
+                            <span className="font-semibold mb-0.5">{invoice.vendor.status}</span>
+                            <span className="text-white/80">
+                              {invoice.vendor.status === "Top" && "Extremely consistent supplier"}
+                              {invoice.vendor.status === "Regular" && "Usually monthly"}
+                              {invoice.vendor.status === "Periodical" && "Every 2 months"}
+                              {invoice.vendor.status === "Known" && "Used before"}
+                              {invoice.vendor.status === "Unknown" && "New. Exercise caution, first time system processed invoice from this vendor."}
+                              {invoice.vendor.status === "Caution" && "Unexpected, Flagged for some reason"}
+                            </span>
+                            <div className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-black/80" />
+                          </div>
+                        </div>
+                      </div>
                     )}
                   </div>
                   
