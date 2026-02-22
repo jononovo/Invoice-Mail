@@ -65,7 +65,7 @@ export function Sidebar({ activeFolder, onFolderChange }: SidebarProps) {
               key={item.id}
               onClick={() => onFolderChange(item.id)}
               className={cn(
-                "flex items-center justify-between px-4 py-2 rounded-r-full mr-2 transition-colors",
+                "group flex items-center justify-between px-4 py-2 rounded-r-full mr-2 transition-colors",
                 isActive 
                   ? "bg-[#d3e3fd] dark:bg-[#414549] text-[#001d35] dark:text-[#e8eaed] font-semibold" 
                   : "text-[#444746] dark:text-[#e8eaed] hover:bg-black/5 dark:hover:bg-white/5"
@@ -76,7 +76,10 @@ export function Sidebar({ activeFolder, onFolderChange }: SidebarProps) {
                 <span className="text-[14px]">{item.label}</span>
               </div>
               {item.count > 0 && (
-                <div className="flex items-baseline gap-1 text-xs ml-auto">
+                <div className={cn(
+                  "flex items-baseline gap-1 text-xs ml-auto",
+                  !isActive && item.id !== "inbox" && item.id !== "scheduled" ? "opacity-0 group-hover:opacity-100 transition-opacity" : ""
+                )}>
                   <span className={cn("font-medium tracking-tight", isActive ? "text-[#001d35] dark:text-[#e8eaed] font-bold" : "text-[#444746] dark:text-[#e8eaed]")}>
                     {item.value}
                   </span>
