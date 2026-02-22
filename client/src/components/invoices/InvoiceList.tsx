@@ -395,11 +395,11 @@ export function InvoiceList({ invoices, selectedId, onSelect, onToggleRead }: In
                         {invoice.dateReceived}
                       </span>
                       <span className={cn(
-                        "text-[11px] font-medium px-2 py-0.5 rounded-full border border-transparent",
-                        invoice.urgency === "High" ? "bg-red-500/15 text-[#444746] dark:bg-red-500/20 dark:text-[#bdc1c6]" :
-                        invoice.urgency === "Medium" ? "bg-amber-500/15 text-[#444746] dark:bg-amber-500/20 dark:text-[#bdc1c6]" :
-                        "bg-slate-500/15 text-[#444746] dark:bg-slate-500/20 dark:text-[#bdc1c6]",
-                        isSelected && invoice.urgency !== "High" && "bg-black/10 dark:bg-white/10"
+                        "text-[11px] font-medium px-2 py-0.5 rounded-full border border-transparent transition-colors",
+                        invoice.urgency === "High" ? "text-[#444746] dark:text-[#bdc1c6] group-hover:bg-red-500/15 dark:group-hover:bg-red-500/20" :
+                        invoice.urgency === "Medium" ? "text-[#444746] dark:text-[#bdc1c6] group-hover:bg-amber-500/15 dark:group-hover:bg-amber-500/20" :
+                        "text-[#444746] dark:text-[#bdc1c6] group-hover:bg-slate-500/15 dark:group-hover:bg-slate-500/20",
+                        isSelected && invoice.urgency !== "High" && "group-hover:bg-black/10 dark:group-hover:bg-white/10"
                       )}>
                         Due: {invoice.dateDue}
                       </span>
