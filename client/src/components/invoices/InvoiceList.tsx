@@ -32,6 +32,25 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
+const MailUnreadIcon = ({ className }: { className?: string }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+  >
+    <path d="M22 9V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h11" />
+    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+    <circle cx="20" cy="4" r="2.5" fill="currentColor" stroke="none" />
+  </svg>
+);
+
 interface InvoiceListProps {
   invoices: Invoice[];
   selectedId: string | null;
@@ -119,7 +138,7 @@ export function InvoiceList({ invoices, selectedId, onSelect, onToggleRead }: In
           onClick={() => handleMarkAsRead(false)}
           title="Mark as unread"
         >
-          <Mail className="w-4 h-4" />
+          <MailUnreadIcon className="w-4 h-4" />
         </button>
         <button 
           className="hover:text-foreground hover:bg-secondary/50 p-1.5 rounded"
@@ -208,8 +227,15 @@ export function InvoiceList({ invoices, selectedId, onSelect, onToggleRead }: In
                   <div className="p-1.5 rounded-full hover:bg-black/10 dark:hover:bg-white/10 text-muted-foreground hover:text-foreground transition-colors cursor-pointer" title="Delete">
                     <Trash2 className="w-[18px] h-[18px]" />
                   </div>
-                  <div className="p-1.5 rounded-full hover:bg-black/10 dark:hover:bg-white/10 text-muted-foreground hover:text-foreground transition-colors cursor-pointer" title="Mark as unread">
-                    <Mail className="w-[18px] h-[18px]" />
+                  <div 
+                    className="p-1.5 rounded-full hover:bg-black/10 dark:hover:bg-white/10 text-muted-foreground hover:text-foreground transition-colors cursor-pointer" 
+                    title="Mark as unread"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onToggleRead([invoice.id], false);
+                    }}
+                  >
+                    <MailUnreadIcon className="w-[18px] h-[18px]" />
                   </div>
                   <div className="p-1.5 rounded-full hover:bg-black/10 dark:hover:bg-white/10 text-muted-foreground hover:text-foreground transition-colors cursor-pointer" title="Snooze">
                     <Clock className="w-[18px] h-[18px]" />
