@@ -6,17 +6,22 @@ import { InvoiceDetail } from "@/components/invoices/InvoiceDetail";
 import { type Invoice, type InvoiceStatus, mockInvoices } from "@/lib/mock-data";
 
 export default function Home() {
+  const [invoices, setInvoices] = useState<Invoice[]>(mockInvoices);
   const [activeFolder, setActiveFolder] = useState<InvoiceStatus>("inbox");
   const [selectedInvoiceId, setSelectedInvoiceId] = useState<string | null>(
-    mockInvoices[0]?.id || null
+    invoices[0]?.id || null
   );
 
-  const filteredInvoices = mockInvoices.filter(
+  const filteredInvoices = invoices.filter(
     (inv) => inv.status === activeFolder
   );
 
   const selectedInvoice =
-    mockInvoices.find((inv) => inv.id === selectedInvoiceId) || null;
+    invoices.find((inv) => inv.id === selectedInvoiceId) || null;
+
+  const handleToggleRead = (ids: string[], read: boolean) => {
+    setInvoices(prev => prev.map(inv => ids.includes(inv.id) ? { ...inv, read } : inv));
+  };
 
   return (
     <div className="flex flex-col h-screen w-full bg-background">
@@ -34,6 +39,7 @@ export default function Home() {
             invoices={filteredInvoices}
             selectedId={selectedInvoiceId}
             onSelect={setSelectedInvoiceId}
+            onToggleRead={handleToggleRead}
           />
           {selectedInvoice ? (
             <InvoiceDetail invoice={selectedInvoice} />

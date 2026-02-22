@@ -1,12 +1,15 @@
+import { useState } from "react";
 import { 
   Star, 
   Square, 
+  CheckSquare,
   RotateCw,
   ChevronDown,
   Archive,
   AlertOctagon,
   Trash2,
   Mail,
+  MailOpen,
   Clock,
   CheckCircle,
   FolderInput,
@@ -22,21 +25,84 @@ import { type Invoice } from "@/lib/mock-data";
 import { cn } from "@/lib/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 interface InvoiceListProps {
   invoices: Invoice[];
   selectedId: string | null;
   onSelect: (id: string) => void;
+  onToggleRead: (ids: string[], read: boolean) => void;
 }
 
-export function InvoiceList({ invoices, selectedId, onSelect }: InvoiceListProps) {
+export function InvoiceList({ invoices, selectedId, onSelect, onToggleRead }: InvoiceListProps) {
+  const [checkedIds, setCheckedIds] = useState<Set<string>>(new Set());
+
+  const handleCheck = (e: React.MouseEvent, id: string) => {
+    e.stopPropagation();
+    const next = new Set(checkedIds);
+    if (next.has(id)) next.delete(id);
+    else next.add(id);
+    setCheckedIds(next);
+  };
+
+  const handleCheckAll = () => {
+    if (checkedIds.size === invoices.length && invoices.length > 0) {
+      setCheckedIds(new Set());
+    } else {
+      setCheckedIds(new Set(invoices.map(i => i.id)));
+    }
+  };
+
+  const handleSelectGroup = (group: string) => {
+    if (group === 'All') setCheckedIds(new Set(invoices.map(i => i.id)));
+    if (group === 'None') setCheckedIds(new Set());
+    if (group === 'Read') setCheckedIds(new Set(invoices.filter(i => i.read).map(i => i.id)));
+    if (group === 'Unread') setCheckedIds(new Set(invoices.filter(i => !i.read).map(i => i.id)));
+    if (group === 'Starred') setCheckedIds(new Set(invoices.filter(i => i.starred).map(i => i.id)));
+    if (group === 'Unstarred') setCheckedIds(new Set(invoices.filter(i => !i.starred).map(i => i.id)));
+  };
+
+  const handleMarkAsRead = (read: boolean) => {
+    if (checkedIds.size > 0) {
+      onToggleRead(Array.from(checkedIds), read);
+      setCheckedIds(new Set());
+    }
+  };
+
+  const hasChecked = checkedIds.size > 0;
+  const CheckIcon = hasChecked ? CheckSquare : Square;
+
   return (
     <div className="w-[450px] lg:w-[500px] flex-shrink-0 border-r flex flex-col bg-card relative">
       {/* Action Menu Row */}
       <div className="h-12 border-b flex items-center px-4 gap-1 text-muted-foreground bg-secondary/30 sticky top-0 z-10">
-        <div className="flex items-center gap-0.5 hover:bg-secondary/50 rounded px-1.5 py-1.5 cursor-pointer mr-2">
-          <Square className="w-4 h-4" />
-          <ChevronDown className="w-3 h-3" />
+        <div className="flex items-center gap-0.5 mr-2">
+          <div 
+            className="hover:bg-secondary/50 rounded px-1.5 py-1.5 cursor-pointer flex items-center"
+            onClick={handleCheckAll}
+          >
+            <CheckIcon className={cn("w-4 h-4", hasChecked ? "text-primary" : "")} />
+          </div>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <div className="hover:bg-secondary/50 rounded px-1 py-1.5 cursor-pointer flex items-center">
+                <ChevronDown className="w-3 h-3" />
+              </div>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="start" className="w-40">
+              <DropdownMenuItem onClick={() => handleSelectGroup('All')}>All</DropdownMenuItem>
+              <DropdownMenuItem onClick={() => handleSelectGroup('None')}>None</DropdownMenuItem>
+              <DropdownMenuItem onClick={() => handleSelectGroup('Read')}>Read</DropdownMenuItem>
+              <DropdownMenuItem onClick={() => handleSelectGroup('Unread')}>Unread</DropdownMenuItem>
+              <DropdownMenuItem onClick={() => handleSelectGroup('Starred')}>Starred</DropdownMenuItem>
+              <DropdownMenuItem onClick={() => handleSelectGroup('Unstarred')}>Unstarred</DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
         <button className="hover:text-foreground hover:bg-secondary/50 p-1.5 rounded">
           <Archive className="w-4 h-4" />
@@ -48,8 +114,19 @@ export function InvoiceList({ invoices, selectedId, onSelect }: InvoiceListProps
           <Trash2 className="w-4 h-4" />
         </button>
         <div className="w-[1px] h-4 bg-border mx-1"></div>
-        <button className="hover:text-foreground hover:bg-secondary/50 p-1.5 rounded">
+        <button 
+          className="hover:text-foreground hover:bg-secondary/50 p-1.5 rounded"
+          onClick={() => handleMarkAsRead(false)}
+          title="Mark as unread"
+        >
           <Mail className="w-4 h-4" />
+        </button>
+        <button 
+          className="hover:text-foreground hover:bg-secondary/50 p-1.5 rounded"
+          onClick={() => handleMarkAsRead(true)}
+          title="Mark as read"
+        >
+          <MailOpen className="w-4 h-4" />
         </button>
         <button className="hover:text-foreground hover:bg-secondary/50 p-1.5 rounded">
           <Clock className="w-4 h-4" />
@@ -146,11 +223,18 @@ export function InvoiceList({ invoices, selectedId, onSelect }: InvoiceListProps
                     <GripVertical className="w-[18px] h-[18px]" strokeWidth={2.5} />
                   </div>
                   
-                  <div className={cn(
-                    "flex gap-3 transition-opacity ml-2 items-center",
-                    !isSelected && invoice.read ? "opacity-50 group-hover:opacity-100" : ""
-                  )}>
-                    <Square className={cn("w-[18px] h-[18px]", isSelected ? "text-[#0b57d0] dark:text-[#a8c7fa]" : "")} />
+                  <div 
+                    className={cn(
+                      "flex gap-3 transition-opacity ml-2 items-center",
+                      !isSelected && invoice.read ? "opacity-50 group-hover:opacity-100" : ""
+                    )}
+                    onClick={(e) => handleCheck(e, invoice.id)}
+                  >
+                    {checkedIds.has(invoice.id) ? (
+                      <CheckSquare className="w-[18px] h-[18px] text-[#0b57d0] dark:text-[#a8c7fa]" />
+                    ) : (
+                      <Square className={cn("w-[18px] h-[18px]", isSelected ? "text-[#0b57d0] dark:text-[#a8c7fa]" : "")} />
+                    )}
                   </div>
                   
                   <div className="flex items-center gap-2 overflow-hidden flex-1 pl-1">
@@ -160,8 +244,7 @@ export function InvoiceList({ invoices, selectedId, onSelect }: InvoiceListProps
                     </Avatar>
                     <span className={cn(
                       "truncate text-sm", 
-                      !invoice.read ? "font-bold" : "",
-                      isSelected && "font-bold text-[#001d35] dark:text-[#e8eaed]"
+                      !invoice.read ? "font-bold text-[#001d35] dark:text-[#e8eaed]" : "text-[#444746] dark:text-[#bdc1c6]"
                     )}>
                       {invoice.vendor.name}
                     </span>
@@ -183,7 +266,7 @@ export function InvoiceList({ invoices, selectedId, onSelect }: InvoiceListProps
                   <div className="flex items-center">
                     <span className={cn(
                       "text-sm font-mono whitespace-nowrap",
-                      isSelected ? "text-[#0b57d0] dark:text-[#a8c7fa] font-bold" : "text-primary font-medium"
+                      !invoice.read ? "text-[#0b57d0] dark:text-[#a8c7fa] font-bold" : "text-primary font-medium"
                     )}>
                       {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(invoice.value)}
                     </span>
@@ -194,8 +277,7 @@ export function InvoiceList({ invoices, selectedId, onSelect }: InvoiceListProps
                   <div className="flex items-center justify-between gap-2">
                     <span className={cn(
                       "text-sm truncate", 
-                      !invoice.read ? "font-bold" : "",
-                      isSelected && "font-bold text-[#001d35] dark:text-[#e8eaed]"
+                      !invoice.read ? "font-bold text-[#001d35] dark:text-[#e8eaed]" : "text-[#444746] dark:text-[#bdc1c6]"
                     )}>
                       {invoice.purpose}
                     </span>
@@ -219,8 +301,7 @@ export function InvoiceList({ invoices, selectedId, onSelect }: InvoiceListProps
                     <div className="flex items-center gap-2">
                       <span className={cn(
                         "text-xs whitespace-nowrap opacity-70", 
-                        !invoice.read ? "font-bold" : "",
-                        isSelected && "font-bold text-[#001d35] dark:text-[#e8eaed]"
+                        !invoice.read ? "font-bold text-[#001d35] dark:text-[#e8eaed]" : "text-[#444746] dark:text-[#bdc1c6]"
                       )}>
                         {invoice.dateReceived}
                       </span>
