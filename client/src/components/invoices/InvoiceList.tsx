@@ -373,12 +373,13 @@ export function InvoiceList({ invoices, selectedId, onSelect, onToggleRead }: In
                     <div className="flex items-center gap-2">
                       {invoice.valueCaution && (
                         <span className={cn(
-                          "text-[10px] font-medium px-1.5 py-0 h-4 rounded border whitespace-nowrap flex items-center",
-                          invoice.valueCaution === "Consistent" ? "bg-green-500/10 text-green-700 border-green-200 dark:bg-green-500/20 dark:text-green-300 dark:border-green-500/30" :
-                          invoice.valueCaution === "Regular" ? "bg-blue-500/10 text-blue-700 border-blue-200 dark:bg-blue-500/20 dark:text-blue-300 dark:border-blue-500/30" :
-                          invoice.valueCaution === "Review" ? "bg-amber-500/10 text-amber-700 border-amber-200 dark:bg-amber-500/20 dark:text-amber-300 dark:border-amber-500/30" :
-                          invoice.valueCaution === "Suspicious" ? "bg-orange-500/10 text-orange-700 border-orange-200 dark:bg-orange-500/20 dark:text-orange-300 dark:border-orange-500/30" :
-                          "bg-red-500/10 text-red-700 border-red-200 dark:bg-red-500/20 dark:text-red-300 dark:border-red-500/30"
+                          "text-[10px] font-medium px-1.5 py-0 h-4 rounded border whitespace-nowrap flex items-center transition-colors",
+                          "border-transparent bg-transparent",
+                          invoice.valueCaution === "Consistent" ? "text-green-700 dark:text-green-300 group-hover:bg-green-500/10 group-hover:border-green-200 dark:group-hover:bg-green-500/20 dark:group-hover:border-green-500/30" :
+                          invoice.valueCaution === "Regular" ? "text-blue-700 dark:text-blue-300 group-hover:bg-blue-500/10 group-hover:border-blue-200 dark:group-hover:bg-blue-500/20 dark:group-hover:border-blue-500/30" :
+                          invoice.valueCaution === "Review" ? "text-amber-700 dark:text-amber-300 group-hover:bg-amber-500/10 group-hover:border-amber-200 dark:group-hover:bg-amber-500/20 dark:group-hover:border-amber-500/30" :
+                          invoice.valueCaution === "Suspicious" ? "text-orange-700 dark:text-orange-300 group-hover:bg-orange-500/10 group-hover:border-orange-200 dark:group-hover:bg-orange-500/20 dark:group-hover:border-orange-500/30" :
+                          "text-red-700 dark:text-red-300 group-hover:bg-red-500/10 group-hover:border-red-200 dark:group-hover:bg-red-500/20 dark:group-hover:border-red-500/30"
                         )}>
                           {invoice.valueCaution}
                         </span>
