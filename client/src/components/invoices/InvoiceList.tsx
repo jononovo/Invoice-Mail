@@ -47,7 +47,7 @@ const MailUnreadIcon = ({ className }: { className?: string }) => (
   >
     <path d="M22 9V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h11" />
     <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
-    <circle cx="20" cy="4" r="2.5" fill="currentColor" stroke="none" />
+    <circle cx="21" cy="3" r="3" fill="currentColor" stroke="none" />
   </svg>
 );
 
@@ -135,14 +135,20 @@ export function InvoiceList({ invoices, selectedId, onSelect, onToggleRead }: In
         <div className="w-[1px] h-4 bg-border mx-1"></div>
         <button 
           className="hover:text-foreground hover:bg-secondary/50 p-1.5 rounded"
-          onClick={() => handleMarkAsRead(false)}
+          onClick={(e) => {
+            e.stopPropagation();
+            handleMarkAsRead(false);
+          }}
           title="Mark as unread"
         >
           <MailUnreadIcon className="w-4 h-4" />
         </button>
         <button 
           className="hover:text-foreground hover:bg-secondary/50 p-1.5 rounded"
-          onClick={() => handleMarkAsRead(true)}
+          onClick={(e) => {
+            e.stopPropagation();
+            handleMarkAsRead(true);
+          }}
           title="Mark as read"
         >
           <MailOpen className="w-4 h-4" />
