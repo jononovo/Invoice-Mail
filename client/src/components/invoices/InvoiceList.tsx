@@ -188,7 +188,7 @@ export function InvoiceList({ invoices, selectedId, onSelect, onToggleRead }: In
                   isSelected 
                     ? "bg-[#d3e3fd] dark:bg-[#414549] text-[#001d35] dark:text-[#e8eaed]" 
                     : !invoice.read 
-                      ? "bg-card dark:bg-[#202124] text-foreground font-bold" 
+                      ? "bg-white dark:bg-[#202124] text-foreground" 
                       : "bg-[#f2f6fc] dark:bg-[#202124] text-[#444746] dark:text-[#bdc1c6]",
                   !isSelected && "hover:shadow-[inset_1px_0_0_0_#dadce0,-1px_0_0_0_#dadce0_inset,0_1px_2px_0_rgba(60,64,67,0.3),0_1px_3px_1px_rgba(60,64,67,0.15)] dark:hover:shadow-[inset_1px_0_0_0_#5f6368,-1px_0_0_0_#5f6368_inset,0_1px_2px_0_rgba(0,0,0,0.3),0_1px_3px_1px_rgba(0,0,0,0.15)] z-0 hover:z-10 bg-clip-padding"
                 )}
@@ -199,7 +199,7 @@ export function InvoiceList({ invoices, selectedId, onSelect, onToggleRead }: In
                   isSelected 
                     ? "bg-[#d3e3fd] dark:bg-[#414549]" 
                     : !invoice.read 
-                      ? "bg-card dark:bg-[#202124]" 
+                      ? "bg-white dark:bg-[#202124]" 
                       : "bg-[#f2f6fc] dark:bg-[#202124]"
                 )}>
                   <div className="p-1.5 rounded-full hover:bg-black/10 dark:hover:bg-white/10 text-muted-foreground hover:text-foreground transition-colors cursor-pointer" title="Archive">
